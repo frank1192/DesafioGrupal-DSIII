@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: apigw
-        image: ghcr.io/frank1192/apigtest:latest
+        image: ghcr.io/frank1192/apigateway:latest
         ports:
         - containerPort: 4000
 

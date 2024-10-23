@@ -1,0 +1,105 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: ./serviciofrank
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - authservice
+      - redis
+      - servicemateo
+      - serviciohassen
+      - serviciojuanrodriguez
+      - serviciosebastian
+      - serviciomarcela
+      - serviciomanuel
+      - servicioyissy
+      
+  authservice:
+    build:
+      context: ./authservice
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+
+  servicemateo:
+    build:
+      context: ./servicemateo
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - authservice
+      - redis
+      
+  serviciohassen:
+    build:
+      context: ./serviciohassen
+      dockerfile: Dockerfile
+    ports:
+      - "7005:7005"
+    depends_on:
+      - authservice
+      - redis
+
+  serviciojuanrodriguez:
+    build:
+      context: ./serviciojuanrodriguez
+      dockerfile: Dockerfile
+    ports:
+      - "8095:8095"
+    depends_on:
+      - authservice
+      - redis    
+
+  serviciosebastian:
+    build:
+      context: ./serviciosebastian
+      dockerfile: Dockerfile
+    ports:
+      - "6231:6231"
+    depends_on:
+      - authservice
+      - redis    
+
+  serviciomanuel:
+    build:
+      context: ./serviciomanuel
+      dockerfile: Dockerfile
+    ports:
+      - "8069:8069"
+    depends_on:
+      - authservice
+      - redis    
+
+  serviciomarcela:
+    build:
+      context: ./serviciomarcela
+      dockerfile: Dockerfile
+    ports:
+      - "7000:7000"
+    depends_on:
+      - authservice
+      - redis    
+
+  servicioyissy:
+    build:
+      context: ./servicioyissy
+      dockerfile: Dockerfile
+    ports:
+      - "6060:6060"
+    depends_on:
+      - authservice
+      - redis    
+
+
+

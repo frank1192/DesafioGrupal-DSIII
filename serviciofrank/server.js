@@ -10,7 +10,7 @@ const typeDefs = `
     servicemateo: [String]
     servicehassen: [String]
     servicemarcela: [String]
-    serviceinvitado: [String]
+    serviceinvitado: String
   }
 `;
 
@@ -67,10 +67,20 @@ const resolvers = {
             return [];
         }
     },
-    servicehassen: () => "servicio de hassen",
+    servicehassen: async (parent, args, context, info) => {
+      console.log(context.token);
+      try {
+          const response = await axios.get('http://serviciohassen:7005/menu');
+          const data = response.data;
+          return [...data.desayuno, ...data.almuerzo, ...data.cena];
+      } catch (err) {
+          console.error("Error al obtener datos de servicio hassen", err);
+          return [];
+      }
+    },
     servicemarcela: async () => {
       try {
-        const response = await axios.get('http://serviciomarcela-service:7000/hotel');
+        const response = await axios.get('http://serviciomarcela:7000/hotel');
         const data = response.data;
         return [...data.nombre, ...data.ubicacion, ...data.habitaciones, ...data.estrellas, ...data.precios, ...data.servicios];
       } catch (err) {
