@@ -17,10 +17,7 @@ spec:
         image: ghcr.io/marcela981/serviciomarcela:v1.0
         ports:
         - containerPort: 7000
-
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
