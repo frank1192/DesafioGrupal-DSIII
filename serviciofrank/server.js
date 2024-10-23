@@ -70,9 +70,9 @@ const resolvers = {
     servicehassen: () => "servicio de hassen",
     servicemarcela: async () => {
       try {
-        const response = await axios.get('http://serviciomarcela-service:7000/mensajes');
+        const response = await axios.get('http://serviciomarcela-service:7000/hotel');
         const data = response.data;
-        return `Mensajes del servicio de Marcela: ${data.mensajes.join(', ')}`;
+        return [...data.nombre, ...data.ubicacion, ...data.habitaciones, ...data.estrellas, ...data.precios, ...data.servicios];
       } catch (err) {
         console.error("Error al obtener datos del servicio de Marcela", err);
         return "Error al obtener datos del servicio de Marcela";
