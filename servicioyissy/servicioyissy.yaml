@@ -1,0 +1,35 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicioyissy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: servicioyissy
+  template:
+    metadata:
+      labels:
+        app: servicioyissy
+    spec:
+      containers:
+      - name: servicioyissy
+        image: ghcr.io/yissyposso/habitaciones:lastest
+        ports:
+        - containerPort: 6060
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicioyissy
+spec:
+  selector:
+    app: servicioyissy
+  ports:
+    - protocol: TCP
+      port: 6060
+      targetPort: 6060
+  type: ClusterIP

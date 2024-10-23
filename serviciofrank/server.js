@@ -6,7 +6,7 @@ const typeDefs = `
     servicejuan: String
     servicesebastian: [String]
     servicemanuel: [String]
-    serviceyissi: [String]
+    serviceyissi: String
     servicemateo: [String]
     servicehassen: [String]
     servicemarcela: [String]
@@ -47,7 +47,15 @@ const resolvers = {
           return [];
       }
     },
-    serviceyissi: () => "servicio de yissi",
+    serviceyissi: async () => {
+      try {
+        const response = await axios.get('http://servicioyissy:6060/habitaciones');
+        return response.data; 
+      } catch (err) {
+        console.error("Error al cargar el servicio de Yissy:", err);
+        return "Error al cargar el servicio de Yissy";
+      }
+    },
     servicemateo: async (parent, args, context, info) => {
         console.log(context.token);
         try {
