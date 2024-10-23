@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviciosebastian
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: serviciosebastian
+  template:
+    metadata:
+      labels:
+        app: serviciosebastian
+    spec:
+      containers:
+      - name: serviciosebastian
+        image: ghcr.io/som1326/serviciosebashotel:latest
+        ports:
+        - containerPort: 6231
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviciosebastian
+spec:
+  selector:
+    app: serviciosebastian
+  ports:
+    - protocol: TCP
+      port: 6231
+      targetPort: 6231
+  type: ClusterIP
