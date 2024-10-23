@@ -1,7 +1,4 @@
-FROM node:18
-WORKDIR /usr/src/app
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 7005
-CMD ["node", "server.js"]
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+COPY ./main.py /app/main.py
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8069", "--reload"]

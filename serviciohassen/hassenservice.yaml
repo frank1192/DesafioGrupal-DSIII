@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: serviciomarcela-deployment
+  name: serviciohassen-deployment
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: serviciomarcela
+      app: serviciohassen
   template:
     metadata:
       labels:
-        app: serviciomarcela
+        app: serviciohassen
     spec:
       containers:
-      - name: serviciomarcela
-        image: ghcr.io/marcela981/serviciomarcela:v1.0
+      - name: serviciohassen
+        image: ghcr.io/hassen2208/serviciohassen:v1.0
         ports:
-        - containerPort: 7000
+        - containerPort: 7005
 
 
 ---
@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: serviciomarcela-service
+  name: serviciohassen-service
 spec:
   selector:
-    app: serviciomarcela
+    app: serviciohassen
   ports:
     - protocol: TCP
-      port: 7000
-      targetPort: 7000
+      port: 7005
+      targetPort: 7005
   type: ClusterIP
