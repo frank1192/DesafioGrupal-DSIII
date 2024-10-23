@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: servicioyissy
-        image: ghcr.io/yissyposso/habitaciones:lastest
+        image: ghcr.io/yissyposso/habitaciones:latest
         ports:
         - containerPort: 6060
 
