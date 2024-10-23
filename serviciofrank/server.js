@@ -23,7 +23,17 @@ const resolvers = {
       servicesebastian: () => "servicio de sebastian",
       servicemanuel: () => "servicio de manuel",
       serviceyissi: () => "servicio de yissi",
-      servicemateo: () => "servicio de mateo!",
+      servicemateo: async (parent, args, context, info) => {
+        console.log(context.token);
+        try {
+            const response = await axios.get('http://servicemateo:9090/hotel');
+            const data = response.data;
+            return [...data.nombre, ...data.ubicacion, ...data.habitaciones, ...data.estrellas, ...data.precios, ...data.servicios];
+        } catch (err) {
+            console.error("Error al obtener datos de servicemateo", err);
+            return [];
+        }
+    },
       servicehassen: () => "servicio de hassen",
       servicemarcela: () => "servicio de marcela",
       serviceinvitado: () => "Hola, el servicio que cualquier invitado puede implementar",

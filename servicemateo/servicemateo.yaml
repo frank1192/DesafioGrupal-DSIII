@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicemateo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: servicemateo
+  template:
+    metadata:
+      labels:
+        app: servicemateo
+    spec:
+      containers:
+      - name: servicemateo
+        image: ghcr.io/mateo29dm/servicemateo:latest
+        ports:
+        - containerPort: 9090
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicemateo
+spec:
+  selector:
+    app: servicemateo
+  ports:
+    - protocol: TCP
+      port: 9090
+      targetPort: 9090
+  type: ClusterIP
