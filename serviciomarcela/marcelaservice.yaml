@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviciomarcela-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviciomarcela
+  template:
+    metadata:
+      labels:
+        app: serviciomarcela
+    spec:
+      containers:
+      - name: serviciomarcela
+        image: ghcr.io/marcela981/serviciomarcela:v1.0
+        ports:
+        - containerPort: 7000
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviciomarcela-service
+spec:
+  selector:
+    app: serviciomarcela
+  ports:
+    - protocol: TCP
+      port: 7000
+      targetPort: 7000
+  type: ClusterIP
