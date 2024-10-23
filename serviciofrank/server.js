@@ -25,10 +25,23 @@ const resolvers = {
       serviceyissi: () => "servicio de yissi",
       servicemateo: () => "servicio de mateo!",
       servicehassen: () => "servicio de hassen",
-      servicemarcela: () => "servicio de marcela",
+      servicemarcela: () => "servicio de marcela!",
       serviceinvitado: () => "Hola, el servicio que cualquier invitado puede implementar",
     },
   };
+
+
+  servicemarcela: async () => {
+    try {
+        const response = await axios.get('http://serviciomarcela-service:7000/mensajes');
+        const data = response.data;
+        return `Mensajes del servicio de Marcela: ${data.mensajes.join(', ')}`;
+    } catch (err) {
+        console.error("Error al obtener datos del servicio de Marcela", err);
+        return "Error al obtener datos del servicio de Marcela";
+    }
+}
+
   
 async function getContext({ req }) {
     const authHeader = req.headers.authorization || '';
