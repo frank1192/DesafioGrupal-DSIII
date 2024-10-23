@@ -25,7 +25,17 @@ const resolvers = {
         return "Error al obtener los datos del hotel.";
       }
     },
-    servicesebastian: () => "servicio de sebastian",
+    servicesebastian: async (parent, args, context, info) => {
+      console.log(context.token);
+      try {
+          const response = await axios.get('http://serviciosebastian:6231/eventos');
+          const data = response.data;
+          return [...data.hotel, ...data.conciertos, ...data.obras, ...data.torneos];
+      } catch (err) {
+          console.error("Error al obtener datos de servicio sebastian", err);
+          return [];
+      }
+    },
     servicemanuel: () => "servicio de manuel",
     serviceyissi: () => "servicio de yissi",
     servicemateo: () => "servicio de mateo!",
