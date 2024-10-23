@@ -17,6 +17,9 @@ spec:
         image: ghcr.io/hassen2208/serviciohassen:v1.0
         ports:
         - containerPort: 7005
+      imagePullSecrets:
+      - name: ghcr-secret
+
 
 
 ---
