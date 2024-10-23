@@ -37,7 +37,17 @@ const resolvers = {
           return [];
       }
     },
-    servicemanuel: () => "servicio de manuel",
+    servicemanuel: async (parent, args, context, info) => {
+      console.log(context.token);
+      try {
+          const response = await axios.get('http://serviciomanuel:8069/hotelSuiza');
+          const data = response.data;
+          return [...data.infohotel, ...data.servicios, ...data.habitaciones, ...data.politicas];
+      } catch (err) {
+          console.error("Error al obtener datos del hotelsuiza", err);
+          return [];
+      }
+    },
     serviceyissi: () => "servicio de yissi",
     servicemateo: async (parent, args, context, info) => {
         console.log(context.token);
