@@ -3,65 +3,33 @@ const axios = require('axios');
 
 const typeDefs = `
   type Query {
-    service1: [String]
-    service2: String
-    service3: [String]
-    service4: [String]
+    servicejuan: [String]
+    servicesebastian: [String]
+    servicemanuel: [String]
+    serviceyissi: [String]
+    servicemateo: [String]
+    servicehassen: [String]
+    servicemarcela: [String]
+    serviceinvitado: [String]
   }
 `;
 
 const resolvers = {
-  Query: {
-    service1: async (parent, args, context, info) => {
-      console.log(context.token);
-      try {
-          const response = await axios.get('http://salchipapitas:5000/comestibles');
-          const data = response.data;
-          return [...data.papas, ...data.salchichas];
-      } catch (err) {
-          console.error("Error al obtener datos de salchipapitas", err);
-          return [];
-      }
-  },
-  service2: async () => {
-    try {
-        const response = await axios.get('http://besoscerezas:8080/besos');
-        const data = response.data;
-        let result = "Hola, soy servicio2 Besitos sabor cerezas! Aquí tienes algunos besos y sus frutas asociadas: ";
-        for (const [key, value] of Object.entries(data)) {
-            result += `Beso ${key} -> ${value}, `;
-        }
-        return result.slice(0, -2); // Para eliminar la última coma y espacio
-    } catch (err) {
-        console.error("Error al obtener datos de besoscerezas", err);
-        return "Error al obtener datos de besoscerezas";
-    }
-  },
-    service3: async (parent, args, context, info) => {
-      console.log(context.token);
-      try {
-          const response = await axios.get('http://cachetadacontrucha:7080/menu');
-          const data = response.data;
-          return [...data.cachetada, ...data.truchas];
-      } catch (err) {
-          console.error("Error al obtener datos de cachetadacontrucha", err);
-          return [];
-      }
-  },
-  service4: async (parent, args, context, info) => {
-    console.log(context.token);
-    try {
-        const response = await axios.get('http://serviciofrank:7500/hotel');
-        const data = response.data;
-        return [...data.ubicacion, ...data.datos];
-    } catch (err) {
-        console.error("Error al obtener datos de servicio frank", err);
-        return [];
-    }
-},
-  },
-};
-
+    Query: {
+        servicejuan: (parent, args, context, info) => {
+          console.log(context.token);
+          return "servicio de juan de get";
+      },
+      servicesebastian: () => "servicio de sebastian",
+      servicemanuel: () => "servicio de manuel",
+      serviceyissi: () => "servicio de yissi",
+      servicemateo: () => "servicio de mateo!",
+      servicehassen: () => "servicio de hassen",
+      servicemarcela: () => "servicio de marcela",
+      serviceinvitado: () => "Hola, el servicio que cualquier invitado puede implementar",
+    },
+  };
+  
 async function getContext({ req }) {
     const authHeader = req.headers.authorization || '';
     const token = authHeader.split('Bearer ')[1];
